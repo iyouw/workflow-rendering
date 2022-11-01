@@ -8,7 +8,6 @@ export interface IRenderer {
 
   node: INode;
   parent?: IRenderer;
-  pre?: IRenderer;
 
   readonly children: Array<IRenderer>;
 
@@ -21,9 +20,11 @@ export interface IRenderer {
 
   appendChild(renderer: IRenderer): IRenderer;
   removeChild(renderer: IRenderer): IRenderer;
-
   appendChildren(renderers: Array<IRenderer>): IRenderer;
   removeChildren(renderers: Array<IRenderer>): IRenderer;
+
+  pre(): IRenderer;
+  next(): IRenderer;
 
   layout(): void;
   render(): void;
