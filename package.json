@@ -11,6 +11,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@linker-design/work-flow": "^0.0.17",
     "fabric": "^5.2.4",
     "vue": "^3.2.41"
   },

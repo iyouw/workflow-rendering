@@ -1,23 +1,22 @@
 import type { IPainter } from "../abstraction/i-painter";
 import { fabric } from 'fabric';
+import type { IShape } from "../abstraction/i-shape";
 
 export class FabricPainter implements IPainter {
   private readonly _painter: fabric.Canvas;
 
-  public rowGap: number;
-  public columnGap: number;
+  public rowGap: number = 30;
+  public columnGap: number = 50;
 
   public paddingLeft = 10;
   public paddingRight = 10;
   public paddingTop = 10;
   public paddingBottom = 10;
 
-  constructor(el: string | HTMLCanvasElement, rowGap: number = 30, columnGap: number = 50){
+  constructor(el: string | HTMLCanvasElement){
     this._painter = new fabric.Canvas(el, {
       backgroundColor:'#F1F1F1'
     });
-    this.rowGap = rowGap;
-    this.columnGap = columnGap;
   }
 
   public get width() {
@@ -28,7 +27,7 @@ export class FabricPainter implements IPainter {
     return this._painter.height;
   }
 
-  public rect(): void {
+  public rect(): IShape {
 
     const width = 200;
     const height = 48;
@@ -53,9 +52,11 @@ export class FabricPainter implements IPainter {
     });
 
     this._painter.add(geometry);
+
+    return geometry;
   }
 
-  public text(text: string): void {
+  public text(text: string): IShape {
     const width = 200;
     const height = 48;
 
@@ -81,9 +82,11 @@ export class FabricPainter implements IPainter {
     })
 
     this._painter.add(geometry);
+
+    return geometry;
   }
 
-  public icon(): void {
+  public icon(): IShape {
     // const left = 0;
     // const top = 0;
     // const width = 0;
@@ -108,7 +111,7 @@ export class FabricPainter implements IPainter {
   }
 
 
-  public line(): void {
+  public line(): IShape {
     // const left = 0;
     // const top = 0;
     // const width = 0;
@@ -132,16 +135,16 @@ export class FabricPainter implements IPainter {
     // this._painter.add(geometry);
   }
 
-  public polyline(): void {
+  public polyline(): IShape {
 
   }
 
-  public polygon(): void {
+  public polygon(): IShape {
 
   }
 
   public button(content: string, left?: number, top?: number, width?: number, height?: number, borderRadius?: number, borderStyle?: string,
-    borderColor?: string, fontSize?: number, textColor?: string, backgroundColor?: string) {
+    borderColor?: string, fontSize?: number, textColor?: string, backgroundColor?: string): IShape {
     
     const selectable = false;
 
@@ -193,10 +196,12 @@ export class FabricPainter implements IPainter {
     })
 
     this._painter.add(group)
+
+    return group;
   }
 
   public select(content: string, left?: number, top?: number, width?: number, height?: number, borderRadius?: number, borderStyle?: string,
-    borderColor?: string, fontSize?: number, textColor?: string, backgroundColor?: string) {
+    borderColor?: string, fontSize?: number, textColor?: string, backgroundColor?: string): IShape {
     
     const selectable = false;
 
@@ -263,6 +268,8 @@ export class FabricPainter implements IPainter {
     })
 
     this._painter.add(group)
+
+    return group;
   }
 
   public parallel(){

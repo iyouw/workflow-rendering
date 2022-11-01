@@ -1,8 +1,17 @@
+import type { IShape } from "./i-shape";
+
 export interface IPainter {
-  rect(): void;
-  text(text: string): void;
-  icon(): void;
-  line(): void;
-  polyline(): void;
-  polygon(): void;
+  paddingLeft: number;
+  paddingRight: number;
+  paddingTop: number;
+  paddingBottom: number;
+  rowGap: number;
+  columnGap: number;
+
+  rect(): IShape;
+  text(text: string): IShape;
+  icon(): IShape;
+  line(): IShape;
+  polyline(): IShape;
+  polygon(): IShape;
 }
