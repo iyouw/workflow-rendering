@@ -7,4 +7,8 @@ export abstract class IfRenderer extends GroupRenderer {
   public get isIf(): boolean {
     return true;
   }
+
+  public get isGroup(): boolean {
+    return true;
+  }
 }

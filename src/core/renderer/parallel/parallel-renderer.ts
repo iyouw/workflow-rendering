@@ -7,4 +7,8 @@ export abstract class ParallelRenderer extends GroupRenderer {
   public get isParallel(): boolean {
     return true;
   }
+
+  public get isGroup(): boolean {
+    return true;
+  }
 }

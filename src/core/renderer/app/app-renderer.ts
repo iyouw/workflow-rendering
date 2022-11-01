@@ -9,6 +9,10 @@ export abstract class AppRenderer extends GroupRenderer {
     return true;
   }
 
+  public get isGroup(): boolean {
+    return true;
+  }
+
   public override calcDimension(): void {
     this.children.forEach((child) => child.calcDimension());
     const childWidths = this.children.map( child => child.box.width);
