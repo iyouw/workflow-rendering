@@ -1,8 +1,7 @@
 import type { INode } from "@linker-design/work-flow";
 import type { IBox } from "../abstraction/i-box";
-import type { IRenderer } from "../abstraction/i-renderer";
-import { AppRenderer } from "./app/app-renderer";
-import { Box } from "./box";
+import type { IRenderer } from "../abstraction/renderer/i-renderer";
+import { Box } from "../box";
 
 export abstract class Renderer implements IRenderer {
   public box: IBox;
@@ -50,9 +49,7 @@ export abstract class Renderer implements IRenderer {
     this.calcCoord();
   }
 
-  public render(): void {
-    this.children.forEach((child) => child.render());
-  }
+  public abstract render(): void;
 
   public abstract calcDimension(): void;
 

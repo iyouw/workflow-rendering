@@ -1,4 +1,4 @@
-import type { IRenderer } from "../abstraction/i-renderer";
+import type { IRenderer } from "../abstraction/renderer/i-renderer";
 import { DecorateRenderer } from "./decorate-renderer";
 
 export abstract class StartRenderer extends DecorateRenderer {

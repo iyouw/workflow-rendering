@@ -1,4 +1,4 @@
-import type { IBox } from "../abstraction/i-box";
+import type { IBox } from "./abstraction/i-box"
 
 export class Box implements IBox {
   public left: number = 0;

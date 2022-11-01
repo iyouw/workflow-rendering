@@ -1,4 +1,4 @@
-import type { IRenderer } from "@/core/abstraction/i-renderer";
+import type { IRenderer } from "@/core/abstraction/renderer/i-renderer";
 import { Renderer } from "../renderer";
 
 export abstract class AbilityRenderer extends Renderer {
