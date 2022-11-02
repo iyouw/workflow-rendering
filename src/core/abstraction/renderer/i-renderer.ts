@@ -8,6 +8,7 @@ export interface IRenderer {
 
   node: INode;
   parent?: IRenderer;
+  selected: boolean;
 
   readonly children: Array<IRenderer>;
 
@@ -17,14 +18,15 @@ export interface IRenderer {
   readonly isParallel: boolean;
   readonly isVirtual: boolean;
   readonly isGroup: boolean;
+  readonly isAttach: boolean;
 
   appendChild(renderer: IRenderer): IRenderer;
   removeChild(renderer: IRenderer): IRenderer;
   appendChildren(renderers: Array<IRenderer>): IRenderer;
   removeChildren(renderers: Array<IRenderer>): IRenderer;
 
-  pre(): IRenderer;
-  next(): IRenderer;
+  pre(): IRenderer | undefined;
+  next(): IRenderer | undefined;
 
   layout(): void;
   render(): void;

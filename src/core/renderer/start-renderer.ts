@@ -1,7 +1,8 @@
-import type { IRenderer } from "../abstraction/renderer/i-renderer";
-import { DecorateRenderer } from "./decorate-renderer";
+import type { IAttachRenderer } from "../abstraction/renderer/i-attach-renderer";
+import type { IStartRenderer } from "../abstraction/renderer/i-start-renderer";
+import { AttachRenderer } from "./attach-renderer";
 
-export abstract class StartRenderer extends DecorateRenderer {
-  public abstract warn: IRenderer;
-  public abstract deletor: IRenderer;
+export abstract class StartRenderer extends AttachRenderer implements IStartRenderer {
+  public abstract warn: IAttachRenderer;
+  public abstract deletor: IAttachRenderer;
 }

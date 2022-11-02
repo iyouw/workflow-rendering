@@ -1,6 +1,6 @@
-import { DecorateRenderer } from "./decorate-renderer";
+import { AttachRenderer } from "./attach-renderer";
 
-export abstract class DeletorRenderer extends DecorateRenderer {
+export abstract class DeletorRenderer extends AttachRenderer {
   public calcCoord(): void {
     const { right, centerY } = this.target.box;
     const { height, marginLeft } = this.box;

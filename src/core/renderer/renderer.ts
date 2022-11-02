@@ -10,9 +10,9 @@ export abstract class Renderer implements IRenderer {
   public box: IBox;
   public node: INode;
   public parent?: IRenderer;
-  public pre?: IRenderer;
+  public selected: boolean = false;
 
-  public readonly children = new Array<IRenderer>();
+  public _children = new Array<IRenderer>();
 
   public constructor(node: INode, parent?: IRenderer){
     this.node = node;
@@ -26,6 +26,10 @@ export abstract class Renderer implements IRenderer {
       root = root.parent;
     }
     return isApp(root) ? root : undefined;
+  }
+
+  public get children(): Array<IRenderer> {
+    return this._children;
   }
 
   public get isApp(): boolean {
@@ -52,29 +56,47 @@ export abstract class Renderer implements IRenderer {
     return false;
   }
 
+  public get isAttach(): boolean {
+    return false;
+  }
+
   public appendChild(renderer: IRenderer): IRenderer {
-    let pre = this.children[this.children.length - 2];
-    if(!pre) pre = isGroup(this) ? this.start : this;
-    renderer.pre = pre;
     this.children.push(renderer);
+    renderer.parent = this;
     return this;
   }
 
   public removeChild(renderer: IRenderer): IRenderer {
     const index = this.children.findIndex(x => x === renderer);
-    const next = this.children[index + 1];
-    if(next) next.pre = renderer.pre;
-    this.children.splice(index, 1);
+    if(index !== -1) this.children.splice(index, 1);
+    renderer.parent = undefined;
     return this;
   }
 
   public appendChildren(renderers: Array<IRenderer>): IRenderer {
+    renderers.forEach(renderer=> this.appendChild(renderer));
     return this;
   }
 
   public removeChildren(renderers: Array<IRenderer>): IRenderer {
-
+    renderers.forEach(renderer=> this.removeChild(renderer));
     return this;
+  }
+
+  public pre(): IRenderer | undefined {
+    if(!this.parent) return undefined;
+    const index = this.parent.children.indexOf(this);
+    let pre = this.parent.children[index - 1];
+    if(!pre){
+      pre = isGroup(this.parent) ? this.parent.start : this.parent;
+    }
+    return pre;
+  }
+
+  public next(): IRenderer | undefined {
+    if(!this.parent) return undefined;
+    const index = this.parent.children.indexOf(this);
+    return this.parent.children[index + 1];
   }
 
   public layout(): void {

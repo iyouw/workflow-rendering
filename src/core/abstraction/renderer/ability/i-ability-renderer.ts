@@ -1,8 +1,9 @@
+import type { IAttachRenderer } from "../i-attach-renderer";
 import type { IRenderer } from "../i-renderer";
 
 export interface IAbilityRenderer extends IRenderer {
-  plus: IRenderer;
-  warn: IRenderer;
-  deletor: IRenderer;
-  droper: IRenderer;
+  plus: IAttachRenderer;
+  warn: IAttachRenderer;
+  deletor: IAttachRenderer;
+  droper: IAttachRenderer;
 }

@@ -7,4 +7,8 @@ export interface IRendererFactory {
   createIf(node: INode): IRenderer;
   createParallel(node: INode): IRenderer;
   createVirtual(node: INode): IRenderer;
+  createPlus(target: IRenderer, node: INode): IRenderer;
+  createDelete(target: IRenderer, node: INode): IRenderer;
+  createWarn(target: IRenderer, node: INode): IRenderer;
+  createDroper(target: IRenderer, node: INode): IRenderer;
 }

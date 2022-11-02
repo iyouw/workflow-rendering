@@ -1,6 +1,7 @@
+import type { IAppRenderer } from "@/core/abstraction/renderer/app/i-app-renderer";
 import { GroupRenderer } from "../group-renderer";
 
-export abstract class AppRenderer extends GroupRenderer {
+export abstract class AppRenderer extends GroupRenderer implements IAppRenderer {
   public abstract clientWidth: number;
   public abstract rowGap: number;
   public abstract columnGap: number;
