@@ -18,8 +18,13 @@ export abstract class AbilityRenderer extends Renderer implements IAbilityRender
     const pre = this.pre();
     if(!pre) return;
 
-    const { centerX, bottom } = pre.box;
+    const { centerX, bottom, top } = pre.box;
     this.box.left = centerX - this.box.width / 2;
-    this.box.top = bottom + this.root.rowGap;
+
+    if(pre === this.parent) {
+      this.box.top = top;
+    } else {
+      this.box.top = bottom + this.root.rowGap;
+    }
   }
 }

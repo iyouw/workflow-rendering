@@ -24,6 +24,7 @@ export class FabricAppRenderer extends AppRenderer {
     this.clientWidth = this.painter.clientWidth;
     this.rowGap = this.painter.rowGap;
     this.columnGap = this.painter.columnGap;
+    this.box.marginTop = this.painter.paddingTop;
 
     this.start = new FabricAppStartRenderer(this.painter, this, this.node, this);
     this.end = new FabricAppEndRenderer(this.painter, this, this.node, this);

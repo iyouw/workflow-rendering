@@ -11,7 +11,7 @@ export class FabricPainter implements IFabricPainter {
 
   public paddingLeft: number = 0;
   public paddingRight: number = 0;
-  public paddingTop: number = 0;
+  public paddingTop: number = 80;
   public paddingBottom: number = 0;
   
   public rowGap: number = 60;

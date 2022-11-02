@@ -12,9 +12,10 @@ export abstract class AppStartRenderer extends AttachRenderer implements IAppSta
   }
 
   public calcCoord(): void {
-    const { clientWidth } = this.target as IAppRenderer;
+    const appTarget = this.target as IAppRenderer;
+    const { top, centerX } = appTarget.box;
     const { width, marginTop } = this.box;
-    this.box.left = (clientWidth - width) / 2;
-    this.box.top = marginTop;
+    this.box.left = centerX - width / 2;
+    this.box.top = top +  marginTop;
   }
 }
