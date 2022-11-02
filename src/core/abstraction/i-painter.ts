@@ -1,6 +1,6 @@
 import type { IShape } from "./shape/i-shape";
 
-export interface IPainter {
+export interface IPainter<T extends IShape> {
   clientWidth: number;
   clientHeight: number;
 
@@ -12,10 +12,11 @@ export interface IPainter {
   rowGap: number;
   columnGap: number;
 
-  rect(): IShape;
-  text(text: string): IShape;
-  icon(): IShape;
-  line(): IShape;
-  polyline(): IShape;
-  polygon(): IShape;
+  rect(): T;
+  text(text: string): T;
+  icon(): T;
+  line(): T;
+  polyline(): T;
+  polygon(): T;
+  button(text: string): T;
 }
