@@ -30,7 +30,6 @@ export interface IRenderer {
 
   layout(): void;
   render(): void;
-  renderLine(): void;
   calcDimension(): void;
   calcCoord(): void;
 }

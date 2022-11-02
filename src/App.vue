@@ -6,25 +6,41 @@
 </template>
 
 <script setup lang="ts">
-// import { onMounted } from 'vue';
-// import { FabricPainter } from './core/painter/fabric-painter';
+import { onMounted } from 'vue';
+import { Designer } from './core/designer';
+import { ModelParser, type INodeMetaDict } from '@linker-design/work-flow';
+import { ModelTransformer } from '@linker-design/work-flow';
+import { ScheduleTransformer } from '@linker-design/work-flow';
+import { RendererTransformer } from './core/renderer/renderer-transformer';
+import { FabricRendererFactory } from './fabric/renderer/fabric-renderer-factory';
+import { FabricPainter } from './fabric/painter/fabric-painter';
 
-// onMounted(()=>{
-//   const painter = new FabricPainter('designer');
+import { model, metaDict } from './data/index';
 
-//   painter.button('开始',undefined, undefined, 60, 60, 30);
+onMounted(()=>{
+  const painter = new FabricPainter('designer', {
+    backgroundColor: '#F1F1F1'
+  });
 
-//   painter.button('识别是否有人',undefined, 120, 200, 48, 24);
+  const rendererFactory = new FabricRendererFactory(painter);
+  const rendererTransformer = new RendererTransformer(rendererFactory);
 
-//   painter.button('请将左侧节点或算法拖入框中',undefined, 120 + 48 + 30, 200, 48, 0, 'dashed');
+  const designer = new Designer(ModelParser.Default, ModelTransformer.Default, ScheduleTransformer.Default, rendererTransformer, rendererFactory);
 
-//   painter.select('条件判断1', undefined, 120 + 48 + 30 + 48 + 30, 200, 48);
-//   painter.warn(undefined, 120 + 48 + 30 + 48 + 30+48);
+  designer.init(metaDict as unknown as INodeMetaDict, model);
 
-//   painter.select('条件判断2', undefined, 1070, 200, 48);
+  const jModel = designer.getModel();
+  console.log(jModel);
 
-//   painter.render();
-// })
+  const schedule = designer.getSchedule();
+  console.log(schedule);
+
+  designer.render();
+
+  console.log((designer as any).rendererTree);
+
+  console.log('render work flow');
+})
 </script>
 
 <style lang="css" scoped>

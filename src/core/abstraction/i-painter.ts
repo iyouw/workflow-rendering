@@ -12,11 +12,14 @@ export interface IPainter<T extends IShape> {
   rowGap: number;
   columnGap: number;
 
-  rect(): T;
-  text(text: string): T;
-  icon(): T;
+  rect(width: number, height: number, left?: number, top?: number): T;
+  text(text: string, fontSize: number, left?: number, top?: number): T;
+  icon(img: string, width: number, height: number, left?: number, top?: number): T;
   line(): T;
   polyline(): T;
   polygon(): T;
-  button(text: string): T;
+  path(): T;
+  button(text: string, fontSize: number, width: number, height: number, borderRadius: number, left?: number, top?: number): T;
+  if(text: string, fontSize: number, width: number, height: number, borderRadius: number, left?: number, top?: number): T;
+  parallel(text: string, fontSize: number, width: number, height: number, borderRadius: number, left?: number, top?: number): T;
 }
