@@ -11,7 +11,7 @@ export class Box implements IBox {
   public marginBottom: number = 0;
 
   public get bottom(): number {
-    return this.top + this.marginTop + this.height + this.marginBottom;
+    return this.top + this.height + this.marginBottom;
   }
 
   public get right(): number {

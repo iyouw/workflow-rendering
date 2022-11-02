@@ -36,6 +36,6 @@ export class FabricAbilityRenderer extends AbilityRenderer {
   }
 
   public override render(): void {
-    this.painter.rect(this.width, this.height, this.box.left, this.box.top);
+    this.painter.button('ability', 12, this.width, this.height, this.box.height / 2, this.box.left, this.box.top);
   }
 }

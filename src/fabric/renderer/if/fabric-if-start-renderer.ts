@@ -30,6 +30,6 @@ export class FabricIfStartRenderer extends IfStartRenderer {
   }
 
   public override render(): void {
-    this.painter.rect(this.box.width, this.box.height, this.box.left, this.box.top);
+    this.painter.if('条件开始', 12, this.box.width, this.box.height, this.box.left, this.box.top);
   }
 }

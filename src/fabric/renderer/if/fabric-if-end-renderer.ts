@@ -21,6 +21,6 @@ export class FabricIfEndRenderer extends IfEndRenderer {
   }
 
   public override render(): void {
-    this.painter.rect(this.box.width, this.box.height, this.box.left, this.box.top);
+    this.painter.if('条件结束', 12, this.box.width, this.box.height, this.box.left, this.box.top);
   }
 }

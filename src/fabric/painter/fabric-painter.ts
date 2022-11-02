@@ -30,7 +30,8 @@ export class FabricPainter implements IFabricPainter {
       left,
       top,
       fill: '',
-      stroke:'purple'
+      stroke: 'purple',
+      selectable: false
     })
     this.canvas.add(rect);
     return rect;
@@ -85,21 +86,98 @@ export class FabricPainter implements IFabricPainter {
     return rect;
   }
 
-  public button(text: string, fontSize: number, width: number, height: number, borderRadius: number, left?: number, top?: number): IShape {
-    const rect = new fabric.Rect()
-    this.canvas.add(rect);
-    return rect;
+  public button(content: string, fontSize: number, width: number, height: number, borderRadius: number, left?: number, top?: number): IShape {
+    const rect = new fabric.Rect({
+      width,
+      height,
+      rx: borderRadius,
+      ry: borderRadius,
+      originX:'center',
+      originY: 'center',
+      fill: '',
+      stroke: 'purple',
+      selectable: false
+    });
+
+    const text = new fabric.Text(content,{
+      fontSize,
+      originX: 'center',
+      originY: 'center'
+    })
+
+    const group = new fabric.Group([rect, text],{
+      left,
+      top,
+      selectable: false
+    });
+
+    this.canvas.add(group);
+    return group;
   }
 
-  public if(text: string, fontSize: number, width: number, height: number, borderRadius: number, left?: number, top?: number): IShape {
-    const rect = new fabric.Rect()
-    this.canvas.add(rect);
-    return rect;
+  public if(content: string, fontSize: number, width: number, height: number, left?: number, top?: number): IShape {
+    const points = [
+      { x: 0, y: -height / 2 },
+      { x: width / 2, y: 0 },
+      { x: 0, y: height / 2 },
+      { x: -width / 2, y: 0 }
+    ];
+    const polygon = new fabric.Polygon(points, {
+      width,
+      height,
+      originX:'center',
+      originY: 'center',
+      fill: '',
+      stroke: 'purple',
+      selectable: false
+    });
+
+    const text = new fabric.Text(content,{
+      fontSize,
+      originX: 'center',
+      originY: 'center'
+    })
+
+    const group = new fabric.Group([polygon, text], {
+      left,
+      top,
+      selectable: false
+    });
+
+    this.canvas.add(group);
+    return group;
   }
 
-  public parallel(text: string, fontSize: number, width: number, height: number, borderRadius: number, left?: number, top?: number): IShape {
-    const rect = new fabric.Rect()
-    this.canvas.add(rect);
-    return rect;
+  public parallel(content: string, fontSize: number, width: number, height: number, left?: number, top?: number): IShape {
+    const points = [
+      { x: 0, y: -height / 2 },
+      { x: width / 2, y: 0 },
+      { x: 0, y: height / 2 },
+      { x: -width / 2, y: 0 }
+    ];
+    const polygon = new fabric.Polygon(points, {
+      width,
+      height,
+      originX:'center',
+      originY: 'center',
+      fill: '',
+      stroke: 'purple',
+      selectable: false
+    });
+
+    const text = new fabric.Text(content,{
+      fontSize,
+      originX: 'center',
+      originY: 'center'
+    })
+
+    const group = new fabric.Group([polygon, text], {
+      left,
+      top,
+      selectable: false
+    });
+
+    this.canvas.add(group);
+    return group;
   }
 }

@@ -20,6 +20,6 @@ export interface IPainter<T extends IShape> {
   polygon(): T;
   path(): T;
   button(text: string, fontSize: number, width: number, height: number, borderRadius: number, left?: number, top?: number): T;
-  if(text: string, fontSize: number, width: number, height: number, borderRadius: number, left?: number, top?: number): T;
-  parallel(text: string, fontSize: number, width: number, height: number, borderRadius: number, left?: number, top?: number): T;
+  if(text: string, fontSize: number, width: number, height: number, left?: number, top?: number): T;
+  parallel(text: string, fontSize: number, width: number, height: number, left?: number, top?: number): T;
 }

@@ -16,6 +16,6 @@ export abstract class AppStartRenderer extends AttachRenderer implements IAppSta
     const { top, centerX } = appTarget.box;
     const { width, marginTop } = this.box;
     this.box.left = centerX - width / 2;
-    this.box.top = top +  marginTop;
+    this.box.top = top + marginTop;
   }
 }

@@ -21,6 +21,6 @@ export class FabricAppEndRenderer extends AppEndRenderer {
   }
 
   public override render(): void {
-    this.painter.rect(this.box.width, this.box.height, this.box.left, this.box.top);
+    this.painter.button('结束', 12, this.box.width, this.box.height, this.box.height / 2, this.box.left, this.box.top);
   }
 }
