@@ -15,9 +15,13 @@ export abstract class AppRenderer extends GroupRenderer implements IAppRenderer 
   }
 
   public override calcDimension(): void {
+    this.start.calcDimension();
     this.children.forEach((child) => child.calcDimension());
+    this.end.calcDimension();
+
     const childWidths = this.children.map( child => child.box.width);
     this.box.width = Math.max(...childWidths, this.start.box.width, this.end.box.width);
+
     const childHeights = this.children.reduce((ret, child) => (ret += child.box.height) && ret , 0);
     this.box.height = this.start.box.height + this.rowGap + childHeights + this.rowGap * (this.children.length - 1) + this.rowGap + this.end.box.height;
   }
@@ -25,6 +29,7 @@ export abstract class AppRenderer extends GroupRenderer implements IAppRenderer 
   public override calcCoord(): void {
     this.box.left = (this.clientWidth - this.box.width) / 2;
     this.box.top = this.box.marginTop;
+    
     this.start.calcCoord();
     this.children.forEach(child => child.calcCoord());
     this.end.calcCoord();

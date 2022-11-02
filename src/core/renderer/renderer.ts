@@ -105,6 +105,7 @@ export abstract class Renderer implements IRenderer {
   }
 
   public abstract render(): void;
+  public abstract renderLine(): void;
 
   public abstract calcDimension(): void;
 

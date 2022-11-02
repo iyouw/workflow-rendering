@@ -13,10 +13,13 @@ export abstract class AbilityRenderer extends Renderer implements IAbilityRender
   }
 
   public override calcCoord(): void {
-    if (!this.parent || !this.root) return;
-    const { centerX } = this.parent.box;
-    const preBottom = this.pre()!.box.bottom;
+    if(!this.root) return;
+
+    const pre = this.pre();
+    if(!pre) return;
+
+    const { centerX, bottom } = pre.box;
     this.box.left = centerX - this.box.width / 2;
-    this.box.top = preBottom + this.root.rowGap;
+    this.box.height = bottom + this.root.rowGap;
   }
 }
