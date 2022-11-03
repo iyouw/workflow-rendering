@@ -11,34 +11,34 @@ export abstract class VirtualRenderer extends Renderer implements IVirtualRender
   }
 
   public override calcDimension(): void {
-    if(!this.root) return;
+    if (!this.root) return;
 
-    if(!this.children.length){
+    if (!this.children.length) {
       this.droper.calcDimension();
       this.box.width = this.droper.box.width;
       this.box.height = this.droper.box.height;
       return;
     }
 
-    this.children.forEach(child => child.calcDimension());
+    this.children.forEach((child) => child.calcDimension());
 
-    const childWidths = this.children.map(child => child.box.width);
+    const childWidths = this.children.map((child) => child.box.width);
     const maxChildWidth = Math.max(...childWidths);
     this.box.width = maxChildWidth;
 
-    const childHeights = this.children.reduce((ret, child)=> (ret += child.box.height) && ret, 0) + this.root.rowGap * (this.children.length - 1);
+    const childHeights = this.children.reduce((ret, child) => (ret += child.box.height) && ret, 0) + this.root.rowGap * (this.children.length - 1);
     this.box.height = childHeights;
   }
 
   public override calcCoord(): void {
-    if(!this.root) return;
+    if (!this.root) return;
 
     const pre = this.pre();
-    if(!pre) return;
+    if (!pre) return;
 
     const { rowGap, columnGap } = this.root;
 
-    if(isAttach(pre)){
+    if (isAttach(pre)){
       this.box.left = this.parent!.box.left;
       this.box.top = pre.box.bottom + rowGap;
     } else {
@@ -46,10 +46,27 @@ export abstract class VirtualRenderer extends Renderer implements IVirtualRender
       this.box.top = pre.box.top;
     }
 
-    if(!this.children.length){
+    if (!this.children.length){
       this.droper.calcCoord();
     } else {
-      this.children.forEach(child => child.calcCoord());
+      this.children.forEach((child) => child.calcCoord());
     }
+  }
+
+  public override calcLines(): void {
+    this.lines = [];
+
+    for (let i = 0; i < this.children.length - 1; i++) {
+      const cur = this.children[i];
+      const next = this.children[i + 1];
+      const line = this.getLineByBox(cur.box, next.box);
+      this.lines.push(line);
+    }
+
+    this.children.forEach((child) => child.calcLines());
+  }
+
+  public override render(): void {
+    this.children.forEach((child) => child.render());
   }
 }

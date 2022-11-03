@@ -29,4 +29,8 @@ export class FabricAppRenderer extends AppRenderer {
     this.start = new FabricAppStartRenderer(this.painter, this, this.node, this);
     this.end = new FabricAppEndRenderer(this.painter, this, this.node, this);
   }
+
+  public override renderLine(): void {
+    this.lines.forEach((line) => this.painter.polyline(line));
+  }
 }

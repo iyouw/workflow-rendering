@@ -35,11 +35,16 @@ export abstract class AppRenderer extends GroupRenderer implements IAppRenderer 
     this.end.calcCoord();
   }
 
-  public override render(): void {
-    this.start.render();
-    // here we need  rendering line, temporarily omit this version
-    this.children.forEach(child => child.render());
-    // here we need  rendering line, temporarily omit this version
-    this.end.render();
+  public override calcLines(): void {
+    this.lines = [];
+    const points = [this.start, ...this.children, this.end];
+    for (let i = 0; i < points.length - 1; i++) {
+      const cur = points[i];
+      const next = points[i + 1];
+      const line = this.getLineByBox(cur.box, next.box);
+      this.lines.push(line);
+    }
+
+    this.children.forEach((child) => child.calcLines());
   }
 }

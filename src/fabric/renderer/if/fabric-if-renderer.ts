@@ -38,9 +38,7 @@ export class FabricIfRenderer extends IfRenderer {
     return this;
   }
 
-  public override render(): void {
-    this.start.render();
-    this.children.forEach(child => child.render());
-    this.end.render();
+  public override renderLine(): void {
+    this.lines.forEach((line) => this.painter.polyline(line));
   }
 }

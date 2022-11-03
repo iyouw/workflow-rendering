@@ -1,4 +1,5 @@
 import type { IFabricPainter } from "@/core/abstraction/i-fabric-painter";
+import type { IPoint } from "@/core/abstraction/shape/i-point";
 import type { IShape } from "@/core/abstraction/shape/i-shape";
 
 import { fabric } from 'fabric'
@@ -68,10 +69,15 @@ export class FabricPainter implements IFabricPainter {
     return rect;
   }
 
-  public polyline(): IShape {
-    const rect = new fabric.Rect()
-    this.canvas.add(rect);
-    return rect;
+  public polyline(points: Array<IPoint>): IShape {
+    const polyline = new fabric.Polyline(points,{
+      stroke: 'red',
+      fill:'',
+      selectable: false,
+      
+    })
+    this.canvas.add(polyline);
+    return polyline;
   }
 
   public polygon(): IShape {

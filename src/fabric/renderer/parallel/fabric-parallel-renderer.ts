@@ -29,21 +29,18 @@ export class FabricParallelRenderer extends ParallelRenderer {
 
   public override setBranches(branches: number, nodes?: Array<INode>): IParallelRenderer {
     const diff = branches - this.children.length;
-    if(diff < 0){
+    if (diff < 0){
       this.children.splice(this.children.length + diff - 1, Math.abs(diff));
     }
-    if(diff > 0 && nodes && nodes.length >= diff){
+    if (diff > 0 && nodes && nodes.length >= diff){
       for (let i = 0; i < diff; i++) {
-        this.appendChild(new FabricVirtualRenderer(this.painter, nodes[i], this));
+        this.appendChild( new FabricVirtualRenderer(this.painter, nodes[i], this));
       }
     }
     return this;
   }
 
-
-  public override render(): void {
-    this.start.render()
-    this.children.forEach(child => child.render());
-    this.end.render()
+  public override renderLine(): void {
+    this.lines.forEach((line) => this.painter.polyline(line));
   }
 }

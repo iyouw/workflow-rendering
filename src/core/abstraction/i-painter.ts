@@ -1,3 +1,4 @@
+import type { IPoint } from "fabric/fabric-impl";
 import type { IShape } from "./shape/i-shape";
 
 export interface IPainter<T extends IShape> {
@@ -16,7 +17,7 @@ export interface IPainter<T extends IShape> {
   text(text: string, fontSize: number, left?: number, top?: number): T;
   icon(img: string, width: number, height: number, left?: number, top?: number): T;
   line(): T;
-  polyline(): T;
+  polyline(points: Array<IPoint>): T;
   polygon(): T;
   path(): T;
   button(text: string, fontSize: number, width: number, height: number, borderRadius: number, left?: number, top?: number): T;

@@ -18,7 +18,7 @@ export class FabricVirtualRenderer extends VirtualRenderer {
     this.droper = new FabricDroperRenderer(this.painter, this, this.node, this);
   }
 
-  public override render(): void {
-    this.children.forEach(child => child.render());
+  public override renderLine(): void {
+    this.lines.forEach(line => this.painter.polyline(line));
   }
 }

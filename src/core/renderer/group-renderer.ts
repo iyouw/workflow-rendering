@@ -36,4 +36,25 @@ export abstract class GroupRenderer extends Renderer implements IGroupRenderer {
     this.children.forEach(child => child.calcCoord());
     this.end.calcCoord();
   }
+
+  public override calcLines(): void {
+    this.lines = [];
+
+    const startBox = this.start.box;
+    const endBox = this.end.box;
+
+    for (const child of this.children) {
+      this.lines.push(this.getLineByBox(startBox, child.box));
+      this.lines.push(this.getLineByBox(child.box, endBox));
+    }
+
+    this.children.forEach((child) => child.calcLines());
+  }
+
+  public override render(): void {
+    this.start.render();
+    this.children.forEach((child) => child.render());
+    this.end.render();
+    this.renderLine();
+  }
 }

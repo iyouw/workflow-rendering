@@ -1,5 +1,6 @@
 import type { INode } from "@linker-design/work-flow";
 import type { IBox } from "../i-box";
+import type { IPoint } from "../shape/i-point";
 import type { IAppRenderer } from "./app/i-app-renderer";
 
 export interface IRenderer {
@@ -9,9 +10,9 @@ export interface IRenderer {
   node: INode;
   parent?: IRenderer;
   selected: boolean;
+  lines: Array<Array<IPoint>>;
 
   readonly children: Array<IRenderer>;
-
   readonly isApp: boolean;
   readonly isAbility: boolean;
   readonly isIf: boolean;
@@ -30,6 +31,12 @@ export interface IRenderer {
 
   layout(): void;
   render(): void;
+
   calcDimension(): void;
   calcCoord(): void;
+  calcLines(): void;
+
+  renderLine(): void;
+
+  getLineByBox(start: IBox, end: IBox): Array<IPoint>;
 }
