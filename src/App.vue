@@ -37,7 +37,9 @@ onMounted(()=>{
 
   designer.render();
 
-  console.log((designer as any).rendererTree);
+  designer.on('select', evt=>{
+    evt.target
+  });
 
   console.log('render work flow');
 })

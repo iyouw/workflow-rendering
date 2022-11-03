@@ -16,7 +16,10 @@ export class FabricWarnRenderer extends AttachRenderer {
   }
 
   public override calcCoord(): void {
-    
+    this.box.marginRight = 17;
+    const { left, centerY } = this.target.box;
+    this.box.left = left - this.box.marginRight - this.box.width;
+    this.box.top = centerY - this.box.width / 2;
   }
 
   public override calcDimension(): void {
@@ -25,6 +28,7 @@ export class FabricWarnRenderer extends AttachRenderer {
   }
 
   public override render(): void {
-    this.painter.rect(this.box.width, this.box.height, this.box.left, this.box.top);
+    this.painter.icon('./images/warn.png', this.box.width, this.box.height, this.box.left, this.box.top)
+    // this.painter.rect(this.box.width, this.box.height, this.box.left, this.box.top);
   }
 }

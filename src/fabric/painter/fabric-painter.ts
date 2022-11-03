@@ -12,11 +12,11 @@ export class FabricPainter implements IFabricPainter {
 
   public paddingLeft: number = 0;
   public paddingRight: number = 0;
-  public paddingTop: number = 80;
+  public paddingTop: number = 50;
   public paddingBottom: number = 0;
   
   public rowGap: number = 60;
-  public columnGap: number = 50;
+  public columnGap: number = 80;
 
   public constructor(element: string | HTMLCanvasElement, option: any){
     this.canvas = new fabric.Canvas(element, option);
@@ -50,16 +50,16 @@ export class FabricPainter implements IFabricPainter {
   }
 
   public icon(img: string, width: number, height: number, left?: number, top?: number): IShape {
-    const image = new Image(width, height)
-    image.src = img;
-
-    const icon = new fabric.Image(image,{
+    fabric.Image.fromURL(img, image =>{
+      this.canvas.add(image)
+    },{
       left,
-      top
+      top,
+      scaleX: 0.5,
+      scaleY: 0.5,
+      selectable: false
     })
-
-    this.canvas.add(icon);
-    return icon;
+    return new fabric.Rect();
   }
 
 
@@ -116,6 +116,17 @@ export class FabricPainter implements IFabricPainter {
       top,
       selectable: false
     });
+
+    group.on('mouseover', e=>{
+      console.log('mouse enter');
+      rect.set({stroke:'blue'});
+      this.canvas.renderAll();
+    })
+
+    group.on('mouseout', e=>{
+      rect.set({stroke:'cyan'});
+      this.canvas.renderAll();
+    })
 
     this.canvas.add(group);
     return group;

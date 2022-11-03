@@ -27,6 +27,4 @@ export abstract class AbilityRenderer extends Renderer implements IAbilityRender
       this.box.top = bottom + this.root.rowGap;
     }
   }
-
-  public override calcLines(): void {}
 }

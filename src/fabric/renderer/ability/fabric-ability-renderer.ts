@@ -33,9 +33,16 @@ export class FabricAbilityRenderer extends AbilityRenderer {
   public override calcDimension(): void {
     this.box.width = this.width;
     this.box.height = this.height;
+    this.warn.calcDimension();
+  }
+
+  public override calcCoord(): void {
+    super.calcCoord();
+    this.warn.calcCoord();
   }
 
   public override render(): void {
     this.painter.button('ability', 12, this.width, this.height, this.box.height / 2, this.box.left, this.box.top);
+    this.warn.render();
   }
 }
